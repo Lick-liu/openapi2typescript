@@ -1108,8 +1108,11 @@ class ServiceGenerator {
     return s.replace(/[-_ ](\w)/g, (_all, letter) => letter.toUpperCase());
   }
 
-  private replaceDot(s: string) {
-    return s.replace(/\./g, '_').replace(/[-_ ](\w)/g, (_all, letter) => letter.toUpperCase());
+  private replaceDot(s: string): string {
+    return s
+      .replace(/\./g, '_')  // 将点号替换为下划线
+      .replace(/[-_ ](\w)/g, (_, letter) => letter.toUpperCase())  // 将下划线、连字符或空格后的字母转换为大写
+      .replace(/Controller/g, '');  // 去除 "Controller" 字符串
   }
 
   private resolveFunctionName(functionName: string, methodName) {
